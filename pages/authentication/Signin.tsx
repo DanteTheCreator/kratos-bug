@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../../styles/signin.module.css";
-
+import Link from "next/link";
 const Signin = () => {
   return (
     <div>
@@ -38,7 +38,7 @@ const Signin = () => {
                 {" "}
                 Stay signed in for a week{" "}
               </label>
-              <a className={styles.a}href="/Recovery"> Forgot your password? </a>
+              <Link className={styles.a}href="/authentication/Recovery"> Forgot your password? </Link>
             </div>
             <a
               href="#"

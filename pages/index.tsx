@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 
 const Home: NextPage = () => {
   return (
@@ -13,6 +14,7 @@ const Home: NextPage = () => {
 
       <main >
         <>
+        <Link  href="/authentication/Signin" >SIGN IN</Link>
           <section className="wrapper bg-light">
             <div className="container py-14 py-md-16">
               <div className="row">

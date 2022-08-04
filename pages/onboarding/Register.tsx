@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "../../styles/signup.module.css";
+import Link from "next/link";
 
 const Register = () => {
   return (
@@ -69,10 +70,10 @@ const Register = () => {
               
               
             </div>
-            <a className={styles.a} href="/Recovery">
+            <Link className={styles.a} href="/authentication/Recovery">
                 {" "}
                 Forgot your password?{" "}
-              </a>
+            </Link>
             <a
               href="#"
               className={`${styles.button} btn btn-orange rounded-pill`}

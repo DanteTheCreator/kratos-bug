@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../../styles/recovery.module.css"
-
+import Link from "next/link";
 const Recovery = () => {
   return (
     <div>
@@ -37,10 +37,10 @@ const Recovery = () => {
             >
               Reset Password
             </a>
-            <a className={styles.a} href="authentication/Signin">
-                {" "}
-                Return to Sign-In{" "}
-              </a>
+            <Link className={styles.a} href="/authentication/Signin">
+
+                Return to Sign-In
+              </Link>
           </div>
         </div>
   );
