@@ -38,7 +38,7 @@ const Signin = () => {
                 {" "}
                 Stay signed in for a week{" "}
               </label>
-              <a className={styles.a}href="authentication/recovery"> Forgot your password? </a>
+              <a className={styles.a}href="/Recovery"> Forgot your password? </a>
             </div>
             <a
               href="#"
