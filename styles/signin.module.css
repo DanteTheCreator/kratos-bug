@@ -14,7 +14,9 @@
   padding: 2px 16px;
   margin: auto;
   width: 60%;
-  border: 5px solid rgba(246, 139, 119);
+  /*border: 1px solid rgba(246, 139, 119);*/
+  border: 1px solid rgb(3, 3, 3);
+  border-radius: 7px;
   padding: 10px;
   margin-top: 4rem;
 }
@@ -22,12 +24,26 @@
 .button{
     width: 99%;
     margin: auto;
-
+    border-radius: 7px;
     margin-top: 1rem;
+    padding: 0.25rem;
+    font-size: 15px;
 }
 
 .checkbox {
     margin-top: 1rem;
+}
+
+.checkbox_label {
+  color: black;
+
+}
+
+.text__container {
+  padding: 2px 16px;
+  margin: auto;
+  width: 60%;
+  padding: 10px;
 }
 
 .a {
@@ -35,4 +51,13 @@
     font-size: 12px;
     float: right;
     margin-bottom: 1rem;
+}
+
+.signin__text {
+  color: black;
+  margin-right: 0.5rem;
+}
+
+.sign_up:hover {
+  text-decoration: underline;
 }

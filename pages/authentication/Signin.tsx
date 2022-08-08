@@ -1,15 +1,21 @@
 import React from "react";
 import styles from "../../styles/signin.module.css";
+import Image from "next/image";
+import logo from '../../public/assets/img/arcton-logo.svg';
 import Link from "next/link";
 const Signin = () => {
   return (
     <div>
+      <img 
+      src={logo}
+      alt="arcton logo"
+      />
       <div className={styles.container}>
-        <div className="container">
-          <h4>
-            <b>Sign In</b>
-          </h4>
-          <div className="form-floating mb-4">
+        <div className="container p-5 d-flex flex-column">
+          <h2 className="mb-5">
+            <b>Sign in to you account</b>
+          </h2>
+          <div className="form-floating mb-2">
             <input
               id="email"
               type="text"
@@ -18,8 +24,11 @@ const Signin = () => {
             />
             <label htmlFor="email"> Email </label>
           </div>
+          <div className="d-flex justify-content-end ">
+          <Link className={styles.a}href="/authentication/Recovery"> Forgot your password? </Link>
+          </div>
           
-          <div className="form-floating mb-4">
+          <div className="form-floating mt-2 mb-4">
             <input
               id="password"
               type="password"
@@ -34,21 +43,27 @@ const Signin = () => {
                 value=""
                 id="flexCheckDefault"
               />
-              <label className="form-check-label" htmlFor="flexCheckDefault">
+              <label className={styles.checkbox_label} htmlFor="flexCheckDefault">
                 {" "}
                 Stay signed in for a week{" "}
               </label>
-              <Link className={styles.a}href="/authentication/Recovery"> Forgot your password? </Link>
             </div>
             <a
               href="#"
-              className={`${styles.button} btn btn-orange rounded-pill`}
+              className={`${styles.button} btn btn-red`}
             >
-              Sign In
+              Continue
             </a>
           </div>
         </div>
       </div>
+      <div className={styles.text__container}>
+        <div className="d-flex"> 
+          <p className={styles.signin__text}>Don't have an account?</p>
+          <a className={styles.sign_up}href="*">Sign-up</a>
+          </div>
+         
+        </div>
     </div>
   );
 };
