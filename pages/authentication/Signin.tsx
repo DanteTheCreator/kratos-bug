@@ -1,15 +1,16 @@
 import React from "react";
 import styles from "../../styles/signin.module.css";
 import Image from "next/image";
-import logo from '../../public/assets/img/arcton-logo.svg';
 import Link from "next/link";
+import companyLogo from '../../public/assets/img/arcton-logo.svg';
 const Signin = () => {
   return (
     <div>
-      <img 
-      src={logo}
-      alt="arcton logo"
-      />
+       <div className="container row">
+          <div className="col-10 ps-0 offset-3" style={{width: '250px', height: '50px', position: 'relative', top:'60px'}}>
+          <Image className={`${styles.company_logo}`}src={companyLogo} alt="image" layout="fill"/>
+          </div>
+      </div>
       <div className={styles.container}>
         <div className="container p-5 d-flex flex-column">
           <h2 className="mb-5">
@@ -63,6 +64,12 @@ const Signin = () => {
           <a className={styles.sign_up}href="*">Sign-up</a>
           </div>
          
+        </div>
+        
+        <div className={`${styles.contact_info} d-flex col-3 offset-1 mt-9 justify-content-between`}>
+          <p>(c) arcton</p>
+          <a href="arcton.com"><p>Contact</p></a>
+          <a href="arcton.com"><p>Privacy & Terms</p></a>
         </div>
     </div>
   );

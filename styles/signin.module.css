@@ -61,3 +61,17 @@
 .sign_up:hover {
   text-decoration: underline;
 }
+
+.company_logo {
+  width: 100%;
+}
+
+.contact_info a {
+  text-decoration: underline;
+}
+
+.contact_info {
+  font-size: 15px;
+  position: relative;
+  top: 9rem;
+}

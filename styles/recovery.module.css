@@ -49,3 +49,17 @@
   cursor: pointer;
   padding-top: 0.5rem;
 }
+
+.company_logo {
+  width: 100%;
+}
+
+.contact_info a {
+  text-decoration: underline;
+}
+
+.contact_info {
+  font-size: 15px;
+  position: relative;
+  top: 15rem;
+}
