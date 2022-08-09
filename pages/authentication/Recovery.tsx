@@ -1,7 +1,9 @@
 import React from "react";
 import styles from "../../styles/recovery.module.css"
 import Link from "next/link";
-const Recovery = () => {
+import { NextPage } from "next";
+
+const Recovery: NextPage = () => {
   return (
     <div>
       {" "}

@@ -1,7 +1,9 @@
 import React from "react";
 import styles from "../../styles/signin.module.css";
 import Link from "next/link";
-const Signin = () => {
+import { NextPage } from "next";
+
+const Signin:NextPage = () => {
   return (
     <div>
       <div className={styles.container}>

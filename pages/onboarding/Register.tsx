@@ -1,8 +1,9 @@
 import React from "react";
 import styles from "../../styles/signup.module.css";
 import Link from "next/link";
+import { NextPage } from "next";
 
-const Register = () => {
+const Register: NextPage = () => {
   return (
     <div>
       <div className={styles.container}>
