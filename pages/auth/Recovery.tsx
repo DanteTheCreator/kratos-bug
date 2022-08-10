@@ -2,7 +2,8 @@ import React from "react";
 import styles from "../../styles/recovery.module.css"
 import Image from "next/image";
 import Link from "next/link";
-import companyLogo from '../../public/assets/img/arcton-logo.svg';
+import companyLogo from "../../public/assets/img/logo.png";
+
 const Recovery = () => {
   return (
     <div>
