@@ -6,24 +6,52 @@ import companyLogo from "../../public/assets/img/arcton-logo.svg";
 import { getLoginFlow } from "../api/axiosConfig";
 import { Id } from "../api/axiosConfig";
 
+import { V0alpha2Api, Configuration, Session, Identity, SubmitSelfServiceLoginFlowBody } from "@ory/client"
+
+const basePath = process.env.REACT_APP_ORY_URL || "http://localhost:4433"
+const ory = new V0alpha2Api(
+  new Configuration({
+    basePath,
+    baseOptions: {
+      withCredentials: true,
+    },
+  }),
+)
+
 const Signin = () => {
+
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
-  const [flowId, setFlowId] = useState<Id>();
+  const [csrfToken, setCsrfToken] = useState<string>();
+  const [flowId, setFlowId] = useState<string>();
   const [action, setAction] = useState<string>();
 
   useEffect(() => {
-    getLoginFlow().then((data) => {
-      if(data){
-       setFlowId(data.id) 
-       setAction(data.ui.action)
-      }  else{
-        return 'error'
+    ory.initializeSelfServiceLoginFlowForBrowsers(false).then(
+      response => {      
+        setCsrfToken((response.data.ui.nodes.find(x => (x.attributes as any).name == 'csrf_token')?.attributes as any).value);
+        setFlowId(response.data.id);
+        setAction(response.data.ui.action);
       }
-      
-    });
-      console.log(flowId);
+    );
   }, []);
+
+  const handleLogin = event => {
+    event.preventDefault();
+    
+    let body: SubmitSelfServiceLoginFlowBody = {
+      method: "password",
+      identifier: event.target.email.value,
+      password: event.target.password.value,
+      csrf_token: event.target.csrf_token.value
+    }
+
+    ory.submitSelfServiceLoginFlow(flowId!.toString(), body).then(
+      response => {
+        console.log(response);
+      }
+    )    
+  }
 
   return (
     <div>
@@ -54,7 +82,13 @@ const Signin = () => {
             action={action}
             id="signin"
             method="post"
+            onSubmit={handleLogin}
           >
+            <input
+                value={csrfToken}
+                id="csrf_token"
+                type="hidden"
+              />
             <div className="form-floating mb-2">
               <input
                 ref={emailRef}
@@ -119,7 +153,7 @@ const Signin = () => {
           <p>Contact</p>
         </a>
         <a href="arcton.com">
-          <p>Privacy & Terms</p>
+          <p>Privacy &amp; Terms</p>
         </a>
       </div>
     </div>
