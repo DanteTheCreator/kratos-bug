@@ -3,7 +3,8 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import companyLogo from "../../public/assets/img/logo.png";
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router'
+
 import { V0alpha2Api, Configuration, Session, Identity, SubmitSelfServiceLoginFlowBody } from "@ory/client"
 
 const basePath = process.env.REACT_APP_ORY_URL || "http://localhost:4433"
@@ -25,58 +26,52 @@ const Signin = () => {
   const [csrfToken, setCsrfToken] = useState<string>();
   const [flowId, setFlowId] = useState<string>();
   const [action, setAction] = useState<string>();
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>();
-  const [session, setSession] = useState<Session>();
-  const [logoutUrl, setLogoutUrl] = useState<string>();
+  const [errorMessage, setErrorMessage] = useState<string>();
 
-  const getUserName = (identity: Identity) =>
-  identity.traits.email || identity.traits.username
-
+  const [isBusy, setIsBusy] = useState<Boolean>(false);
 
   useEffect(() => {
-    isLoggedIn && router.push('/marketplace/');
 
     ory
-    .toSession()
-    .then(({ data }) => {
-      // User has a session!
-      setSession(data)
-      ory.createSelfServiceLogoutFlowUrlForBrowsers().then(({ data }) => {
-        // Get also the logout url
-        setLogoutUrl(data.logout_url)
-        setIsLoggedIn(true)
+      .toSession()
+      .then(() => {
+        router.push('/dashboard');
       })
-    })
-    .catch((err) => {
-      console.error(err)
-      // Redirect to login page
-      window.location.replace(`${basePath}/ui/login`)
-    })
-
-    ory.initializeSelfServiceLoginFlowForBrowsers(false).then(
-      response => {      
-        setCsrfToken((response.data.ui.nodes.find(x => (x.attributes as any).name == 'csrf_token')?.attributes as any).value);
-        setFlowId(response.data.id);
-        setAction(response.data.ui.action);
-      }
-    );
-  }, [isLoggedIn, router]);
+      .catch(() => {
+        ory.initializeSelfServiceLoginFlowForBrowsers(false).then(
+          response => {      
+            setCsrfToken((response.data.ui.nodes.find(x => (x.attributes as any).name == 'csrf_token')?.attributes as any).value);
+            setFlowId(response.data.id);
+            setAction(response.data.ui.action);
+          }
+        );
+      });
+  }, []);
 
   const handleLogin = (event:any) => {
     event.preventDefault();
-    
+    setIsBusy(true);
     let body: SubmitSelfServiceLoginFlowBody = {
       method: "password",
-      identifier: event.target.email.value,
-      password: event.target.password.value,
+      identifier: event.target.loginEmail.value,
+      password: event.target.loginPassword.value,
       csrf_token: event.target.csrf_token.value
     }
 
     ory.submitSelfServiceLoginFlow(flowId!.toString(), body).then(
-      response => {
-        console.log(response);
+      _ => {
+        router.push('/dashboard');
       }
-    )    
+    ).catch((reason:any) => {
+
+      if(reason.response.data.ui.messages.length > 0) {
+        setErrorMessage(reason.response.data.ui.messages[0].text)
+      } else {
+        setErrorMessage("");
+      }
+      setCsrfToken((reason.response.data.ui.nodes.find((x:any) => (x.attributes.name == 'csrf_token'))?.attributes.value));
+      setIsBusy(false);
+    })
   }
 
   return (
@@ -101,7 +96,9 @@ const Signin = () => {
                 <div className="card-body p-11">
                   
                   <h2 className="mb-6 text-start">Sign in to your account</h2>
-                  
+
+                  { ErrorMessage(errorMessage) }
+
                   <form
                       action={action}
                       method="post"
@@ -120,6 +117,7 @@ const Signin = () => {
                           type="text"
                           className="form-control"
                           placeholder="Email"
+                          required
                           tabIndex={1}
                         />
                         <label htmlFor="loginEmail">Email</label>
@@ -136,13 +134,14 @@ const Signin = () => {
                             type="password"
                             className="form-control"
                             placeholder="Enter your password"
+                            required
                             tabIndex={2}
                           />
                         <span className="password-toggle"><i className="uil uil-eye"></i></span>
                         <label htmlFor="loginPassword">Password</label>
                       </div>
                       
-                      <input className="btn btn-primary btn-login w-100 mb-2" tabIndex={3} type="submit" value="Continue" />
+                      { SubmitButton(isBusy) }
 
                     </form>
 
@@ -162,4 +161,34 @@ const Signin = () => {
   );
 };
 
+const ErrorMessage = (message:string|undefined) => {
+  if(!message || message == "") {
+    return "";
+  }
+  return (
+    <div className="alert alert-danger">
+        {message}
+    </div>
+  )
+}
+
+const SubmitButton = (isBusy:Boolean) => {
+
+  if(!isBusy) {
+    return (
+      <button className="btn btn-primary btn-login w-100 mb-2" tabIndex={3} type="submit">
+        <span>Continue</span>
+      </button>
+    )
+  }
+
+  return (
+    <button className="btn btn-primary btn-login w-100 mb-2" tabIndex={3} type="submit" disabled>
+      <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>&nbsp;&nbsp;
+      <span>Continue</span>
+    </button>
+  )
+}
+
 export default Signin;
+
