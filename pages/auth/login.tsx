@@ -123,7 +123,7 @@ const Signin = () => {
                         <label htmlFor="loginEmail">Email</label>
                       </div>
                       <div className="text-end pb-1 fs-13">
-                        <Link className="" href="/authentication/Recovery">
+                        <Link className="" href="/auth/Recovery">
                           Forgot your password?
                         </Link>
                       </div>
@@ -149,7 +149,7 @@ const Signin = () => {
               </div>
 
               <p className="text-start pt-4 fs-13 ps-3">
-                Don&#39;t have an account? <Link className="" href="/auth/recovery">Sign up</Link>
+                Don&#39;t have an account? <Link className="" href="/onboarding/registration">Sign up</Link>
               </p>
               
             </div>
