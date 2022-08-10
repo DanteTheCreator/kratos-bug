@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "../../styles/recovery.module.css"
 import Image from "next/image";
 import Link from "next/link";
+<<<<<<< HEAD:pages/authentication/Recovery.tsx
+import companyLogo from '../../public/assets/img/arcton-logo.svg';
+=======
 import companyLogo from "../../public/assets/img/logo.png";
+>>>>>>> e715a117c8f54db5b387e476adf8e524cef13eaa:pages/auth/Recovery.tsx
 
 const Recovery = () => {
+  useEffect(() => {
+    
+  },[])
+
   return (
     <div>
       <div className="container row">

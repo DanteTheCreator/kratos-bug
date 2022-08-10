@@ -5,7 +5,6 @@ import Link from "next/link";
 import companyLogo from "../../public/assets/img/logo.png";
 import { useRouter } from 'next/router'
 
-
 import { V0alpha2Api, Configuration, Session, Identity, SubmitSelfServiceLoginFlowBody } from "@ory/client"
 
 const basePath = process.env.REACT_APP_ORY_URL || "http://localhost:4433"
