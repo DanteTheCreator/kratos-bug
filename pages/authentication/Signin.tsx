@@ -3,10 +3,9 @@ import styles from "../../styles/signin.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import companyLogo from "../../public/assets/img/arcton-logo.svg";
-import { getLoginFlow } from "../api/axiosConfig";
-import { Id } from "../api/axiosConfig";
+import { useRouter } from "next/router";
 
-import { V0alpha2Api, Configuration, Session, Identity, SubmitSelfServiceLoginFlowBody } from "@ory/client"
+import { V0alpha2Api, Configuration, Session, Identity, SubmitSelfServiceLoginFlowBody } from "@ory/client";
 
 const basePath = process.env.REACT_APP_ORY_URL || "http://localhost:4433"
 const ory = new V0alpha2Api(
@@ -19,14 +18,41 @@ const ory = new V0alpha2Api(
 )
 
 const Signin = () => {
+  const router = useRouter()
 
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const [csrfToken, setCsrfToken] = useState<string>();
   const [flowId, setFlowId] = useState<string>();
   const [action, setAction] = useState<string>();
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>();
+  const [session, setSession] = useState<Session>();
+  const [logoutUrl, setLogoutUrl] = useState<string>();
+
+  const getUserName = (identity: Identity) =>
+  identity.traits.email || identity.traits.username
+
 
   useEffect(() => {
+    isLoggedIn && router.push('/marketplace/');
+
+    ory
+    .toSession()
+    .then(({ data }) => {
+      // User has a session!
+      setSession(data)
+      ory.createSelfServiceLogoutFlowUrlForBrowsers().then(({ data }) => {
+        // Get also the logout url
+        setLogoutUrl(data.logout_url)
+        setIsLoggedIn(true)
+      })
+    })
+    .catch((err) => {
+      console.error(err)
+      // Redirect to login page
+      window.location.replace(`${basePath}/ui/login`)
+    })
+
     ory.initializeSelfServiceLoginFlowForBrowsers(false).then(
       response => {      
         setCsrfToken((response.data.ui.nodes.find(x => (x.attributes as any).name == 'csrf_token')?.attributes as any).value);
@@ -34,7 +60,7 @@ const Signin = () => {
         setAction(response.data.ui.action);
       }
     );
-  }, []);
+  }, [isLoggedIn, router]);
 
   const handleLogin = event => {
     event.preventDefault();

@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "../../styles/recovery.module.css"
 import Image from "next/image";
 import Link from "next/link";
 import companyLogo from '../../public/assets/img/arcton-logo.svg';
+
 const Recovery = () => {
+  useEffect(() => {
+    
+  },[])
+
   return (
     <div>
       <div className="container row">
