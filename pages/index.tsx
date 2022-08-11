@@ -14,7 +14,7 @@ const Home: NextPage = () => {
 
       <main >
         <>
-        <Link  href="/authentication/Signin" >SIGN IN</Link>
+        <Link  href="/auth/Signin" >SIGN IN</Link>
           <section className="wrapper bg-light">
             <div className="container py-14 py-md-16">
               <div className="row">

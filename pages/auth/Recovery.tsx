@@ -52,7 +52,7 @@ const Recovery = () => {
                 </a>
               </div>
             
-              <Link className={styles.a} href="/authentication/Signin">
+              <Link className={styles.a} href="/auth/Signin">
                   <p className={`${styles.return_text} col-8 d-flex ms-0 justify-content-center px-0`}>Return to Sign-In</p>
               </Link>
             </div>
