@@ -13,7 +13,7 @@ var theme = {
     theme.isotope();
     //theme.onepageHeaderOffset();
     theme.anchorSmoothScroll();
-    theme.svgInject();
+    //theme.svgInject();
     theme.backgroundImage();
     theme.backgroundImageMobile();
     theme.imageHoverOverlay();
