@@ -139,7 +139,7 @@ const Signin = () => {
 
               <p className="text-start pt-4 fs-13 ps-3">
                 Don&#39;t have an account?{" "}
-                <Link className="" href="/onboarding/index.tsx">
+                <Link className="" href="/onboarding/registration">
                   Sign up
                 </Link>
               </p>
