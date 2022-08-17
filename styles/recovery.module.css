@@ -45,9 +45,11 @@
 }
 
 .return_text {
-  color: #3f78e0;
-  cursor: pointer;
-  padding-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+  font-size: 13px;
+  margin-top: 1rem;
+  color: #e9594b;
 }
 
 .company_logo {
