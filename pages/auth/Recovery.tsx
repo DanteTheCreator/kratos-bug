@@ -10,9 +10,20 @@ import {
 } from "@ory/client";
 import { useSelector } from "react-redux";
 import { AxiosError } from "axios";
+import { UiNode } from "../../typescript/interfaces";
 
-function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+interface RecoveryResponse {
+  expires_at: string;
+  id: string;
+  issued_at: Date;
+  request_url: string;
+  state: string;
+  type: string;
+  ui: {
+    action: string;
+    method: string;
+    nodes: UiNode[];
+  };
 }
 
 const Recovery = () => {
@@ -27,7 +38,6 @@ const Recovery = () => {
   const { flow: flowId, return_to: returnTo } = router.query;
 
   const handleFlowError = (err: any, flowId: string, func: Function) => {};
-  console.log("flow", flow);
 
   useEffect(() => {
     // If the router is not ready yet, or we already have a flow, do nothing.
@@ -40,7 +50,8 @@ const Recovery = () => {
     if (flowId) {
       ory
         .getSelfServiceRecoveryFlow(String(flowId))
-        .then(({ data }: { data: any }) => {
+        .then(({ data }: { data: SelfServiceRecoveryFlow }) => {
+          // console.log(data)
           setFlow(data);
           setCsrfToken(
             (
@@ -57,7 +68,8 @@ const Recovery = () => {
     // Otherwise we initialize it
     ory
       .initializeSelfServiceRecoveryFlowForBrowsers()
-      .then(({ data }) => {
+      .then(({ data }: { data: SelfServiceRecoveryFlow }) => {
+        console.log(data);
         setFlow(data);
 
         setCsrfToken(
@@ -79,22 +91,21 @@ const Recovery = () => {
 
         return Promise.reject(err);
       });
-  }, [flowId, router, router.isReady, returnTo, flow]);
+  }, [flowId, router, router.isReady, returnTo, flow, ory]);
 
   const onSubmit = (event: any) => {
     event.preventDefault();
     let body: SubmitSelfServiceRecoveryFlowBody = {
       csrf_token: event.target.csrf_token.value,
-      email:  event.target.email.value,
+      email: event.target.email.value,
       method: "link",
     };
     ory
       .submitSelfServiceRecoveryFlow(String(flow?.id), body)
-      .then(({ data }: { data: any }) => {
+      .then(({ data }: { data: SelfServiceRecoveryFlow }) => {
         // Form submission was successful, show the message to the user!
         setFlow(data);
         setIsSent(true);
-        console.log(data);
       })
       .catch(handleFlowError(router, "recovery", setFlow))
       .catch((err: AxiosError<any, any>) => {
@@ -157,7 +168,11 @@ const Recovery = () => {
                 >
                   <button type="submit"> Reset Password</button>
                 </a>
-                {isSent ? <span><h4>Recovery Email Sent</h4></span> : null}
+                {isSent ? (
+                  <span>
+                    <h4>Recovery Email Sent</h4>
+                  </span>
+                ) : null}
               </div>
             </form>
           </div>

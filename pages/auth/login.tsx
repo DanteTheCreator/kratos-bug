@@ -6,12 +6,13 @@ import companyLogo from "../../public/assets/img/logo.png";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { SubmitSelfServiceLoginFlowBody } from "@ory/client";
+import SubmitButton from "../../components/SubmitButton";
+import ErrorMessage from "../../components/ErrorMessage";
+import { IResponse } from "../../typescript/interfaces";
 
 const Signin = () => {
   const router = useRouter();
   const { ory } = useSelector((state: any) => state.auth);
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
   const [csrfToken, setCsrfToken] = useState<string>();
   const [flowId, setFlowId] = useState<string>();
   const [action, setAction] = useState<string>();
@@ -28,11 +29,12 @@ const Signin = () => {
       .catch(() => {
         ory
           .initializeSelfServiceLoginFlowForBrowsers(false)
-          .then((response) => {
+          .then((response: IResponse) => {
+            console.log(response);
             setCsrfToken(
               (
                 response.data.ui.nodes.find(
-                  (x) => (x.attributes as any).name == "csrf_token"
+                  (x) => (x.attributes as any).name === "csrf_token"
                 )?.attributes as any
               ).value
             );
@@ -54,10 +56,11 @@ const Signin = () => {
 
     ory
       .submitSelfServiceLoginFlow(flowId!.toString(), body)
-      .then((_) => {
+      .then((response: IResponse) => {
         router.push("/dashboard");
       })
       .catch((reason: any) => {
+        console.log(reason);
         if (reason.response.data.ui.messages.length > 0) {
           setErrorMessage(reason.response.data.ui.messages[0].text);
         } else {
@@ -98,10 +101,10 @@ const Signin = () => {
                     className="text-start mb-3"
                     onSubmit={handleLogin}
                   >
+                    {/* causing error, need to look into controlled/uncontrolled inputs */}
                     <input value={csrfToken} id="csrf_token" type="hidden" />
                     <div className="form-floating mb-3">
                       <input
-                        ref={emailRef}
                         id="loginEmail"
                         type="text"
                         className="form-control"
@@ -118,7 +121,6 @@ const Signin = () => {
                     </div>
                     <div className="form-floating password-field mb-6">
                       <input
-                        ref={passwordRef}
                         id="loginPassword"
                         type="password"
                         className="form-control"
@@ -148,44 +150,6 @@ const Signin = () => {
         </div>
       </section>
     </main>
-  );
-};
-
-const ErrorMessage = (message: string | undefined) => {
-  if (!message || message == "") {
-    return "";
-  }
-  return <div className="alert alert-danger">{message}</div>;
-};
-
-const SubmitButton = (isBusy: Boolean) => {
-  if (!isBusy) {
-    return (
-      <button
-        className="btn btn-primary btn-login w-100 mb-2"
-        tabIndex={3}
-        type="submit"
-      >
-        <span>Continue</span>
-      </button>
-    );
-  }
-
-  return (
-    <button
-      className="btn btn-primary btn-login w-100 mb-2"
-      tabIndex={3}
-      type="submit"
-      disabled
-    >
-      <span
-        className="spinner-border spinner-border-sm"
-        role="status"
-        aria-hidden="true"
-      ></span>
-      &nbsp;&nbsp;
-      <span>Continue</span>
-    </button>
   );
 };
 
