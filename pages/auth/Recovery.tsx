@@ -168,11 +168,7 @@ const Recovery = () => {
                 >
                   <button type="submit"> Reset Password</button>
                 </a>
-                {isSent ? (
-                  <span>
-                    <h4>Recovery Email Sent</h4>
-                  </span>
-                ) : null}
+                {isSent ? <span><h4>Recovery Email Sent</h4></span> : null}
               </div>
             </form>
           </div>
