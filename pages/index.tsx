@@ -2,8 +2,14 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 const Home: NextPage = () => {
+  const router  = useRouter();
+  useEffect(()=>{
+    router.push("/auth/login")
+  },[])
   return (
     <div >
       <Head>
