@@ -100,22 +100,18 @@ const Register = () => {
                   <div className="d-flex flex-row">
                     <i className="uil uil-check-circle fs-17"></i>
                     <div className="ms-3">
-                      <h5 className="mb-1">Test</h5>
+                      <h5 className="mb-1">Its your turn</h5>
                       <p>
-                        Tortor mauris molestie elit, et lacinia ipsum quam nec
-                        dui. Quisque nec mauris sit amet elit iaculis pretium
-                        sit amet quis magna.{" "}
+                        Invest in those shaping tomorrow to build a better future.
                       </p>
                     </div>
                   </div>
                   <div className="d-flex flex-row">
                     <i className="uil uil-check-circle fs-17"></i>
                     <div className="ms-3">
-                      <h5 className="mb-1">Test</h5>
+                      <h5 className="mb-1">Access to start-ups</h5>
                       <p>
-                        Tortor mauris molestie elit, et lacinia ipsum quam nec
-                        dui. Quisque nec mauris sit amet elit iaculis pretium
-                        sit amet quis magna.{" "}
+                        Gain access to early stage start-up investments together with the pros before the rest.
                       </p>
                     </div>
                   </div>
