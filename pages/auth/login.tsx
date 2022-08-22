@@ -60,7 +60,6 @@ const Signin = () => {
         router.push("/dashboard");
       })
       .catch((reason: any) => {
-        console.log(reason);
         if (reason.response.data.ui.messages.length > 0) {
           setErrorMessage(reason.response.data.ui.messages[0].text);
         } else {

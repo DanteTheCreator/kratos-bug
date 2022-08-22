@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import styles from "../../styles/recovery.module.css";
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -46,7 +46,6 @@ const Recovery = () => {
     }
 
     // If ?flow=.. was in the URL, we fetch it
-
     if (flowId) {
       ory
         .getSelfServiceRecoveryFlow(String(flowId))
@@ -122,59 +121,58 @@ const Recovery = () => {
 
   return (
     <main>
+      <Head>
+        <title>Account Recovery | Arcton</title>
+      </Head>
     <section className="wrapper bg-light">
       <div className="container pb-14 pb-md-16">
         <div className="row">
           <div className="col-lg-7 col-xl-6 col-xxl-5 mx-auto">
             <div className="col-3 my-10 ps-3">
-              <Image
-                className={`${styles.company_logo}`}
-                src={companyLogo}
-                alt="image"
-                />
+            <Image src={companyLogo} alt="Arcton" />
           </div>
 
           <div className="card">
             <div className="card-body p-11">
-              <div className="d-flex flex-column align-items-center ms-0 px-0">
-                <h4 className="col-12 px-0 ms-0">
-                  <b>Reset Your Password</b>
-                  <p className={`${styles.header_text} pt-2 mb-4 col-12`}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe at
-                    veniam autem soluta reiciendis repellat.
-                  </p>
-                </h4>
-                <div className=" mb-4 col-12 px-0">
-                    <form method="post" onSubmit={onSubmit}>
-                      <div className="form-floating">
-                      <input value={csrfToken} id="csrf_token" type="hidden" />
-                      <input
+                <h2 className="mb-2 text-start">Reset your password</h2>
+                <p className="mt-2 mb-4 col-12">
+                    Enter the email address associated with your account, and we'll send you a link to reset your password.
+                </p>
+                <form 
+                  method="post"
+                  className="text-start mb-3"
+                  onSubmit={onSubmit}
+                >
+                  <input value={csrfToken} id="csrf_token" type="hidden" />
+                  <div className="form-floating mb-6">
+                    <input
                         ref={emailRef}
                         id="email"
                         name="email"
                         type="text"
+                        tabIndex={1}
                         className="form-control"
                         placeholder="Enter your email address"
                       />
-                      <label htmlFor="email"> Email </label>
-                      </div>
+                      <label htmlFor="email">Email</label>
+                  </div>
+                  
+                  <button
+                    className="btn btn-primary w-100 mb-2"
+                    tabIndex={2}
+                    type="submit"
+                  >
+                    <span>Reset Password</span>
+                  </button>
+                  
+                </form>
 
-                      <div className="col-12">
-                        <a href="#">
-                            <button type="submit" className={`${styles.button} btn btn-red w-100 py-1`}> Reset Password</button>
-                          </a>
-                          {isSent ? <span><h4>Recovery Email Sent</h4></span> : null}
-                      </div>
-                    </form>
-                </div>
-
-                  <Link className={styles.a} href="/auth/login">
-                    <p className={`${styles.return_text} col-8 d-flex ms-0 my-0 justify-content-center px-0`}>
-                      Return to Sign-In
-                    </p>
-                  </Link>
-                </div>
-            </div>
+                <Link href="/auth/login">
+                  <a className="d-block text-center w-100 mb-2 fs-15">
+                    Return to Sign-In
+                  </a>
+                </Link>
+              </div>
           </div>
 
 
