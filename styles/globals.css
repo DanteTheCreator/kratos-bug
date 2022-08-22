@@ -4,3 +4,7 @@
 @import url('../public/css/vendor/prism.css');
 @import url('../public/css/vendor/scrollcue.css');
 @import url('../public/css/vendor/swiper-bundle.min.css'); */
+
+div#__next {
+    height:100%;
+}

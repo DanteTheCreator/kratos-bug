@@ -30,7 +30,6 @@ const Signin = () => {
         ory
           .initializeSelfServiceLoginFlowForBrowsers(false)
           .then((response: IResponse) => {
-            console.log(response);
             setCsrfToken(
               (
                 response.data.ui.nodes.find(

@@ -737,4 +737,3 @@ var theme = {
     }
   },
 }
-theme.init();

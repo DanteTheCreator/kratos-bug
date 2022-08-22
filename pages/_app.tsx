@@ -18,8 +18,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="shortcut icon" href="/assets/img/favicon.png" />
       </Head>
       <Component {...pageProps} />
-      <Script src="/assets/js/plugins.js" strategy="afterInteractive"></Script>
-      <Script src="/assets/js/theme.js" strategy="lazyOnload"></Script>
+      <Script src="/assets/js/theme.js" strategy="afterInteractive"></Script>
+      <Script src="/assets/js/plugins.js" strategy="afterInteractive" onLoad={() => theme.init()}></Script>
+      
     </Provider>
   );
 }
