@@ -11,20 +11,9 @@ import {
 import { useSelector } from "react-redux";
 import { AxiosError } from "axios";
 import { UiNode } from "../../typescript/interfaces";
+import SubmitButton from "../../components/SubmitButton";
 
-interface RecoveryResponse {
-  expires_at: string;
-  id: string;
-  issued_at: Date;
-  request_url: string;
-  state: string;
-  type: string;
-  ui: {
-    action: string;
-    method: string;
-    nodes: UiNode[];
-  };
-}
+
 
 const Recovery = () => {
   const emailRef = useRef<HTMLInputElement>(null);
@@ -32,6 +21,7 @@ const Recovery = () => {
   const { ory } = useSelector((state: any) => state.auth);
   const [csrfToken, setCsrfToken] = useState<string>();
   const [isSent, setIsSent] = useState<boolean>(false);
+  const [isBusy, setIsBusy] = useState<boolean>(false);
 
   // Get ?flow=... from the URL
   const router = useRouter();
@@ -94,6 +84,7 @@ const Recovery = () => {
 
   const onSubmit = (event: any) => {
     event.preventDefault();
+    setIsBusy(true);
     let body: SubmitSelfServiceRecoveryFlowBody = {
       csrf_token: event.target.csrf_token.value,
       email: event.target.email.value,
@@ -117,6 +108,7 @@ const Recovery = () => {
 
         throw err;
       });
+    setIsBusy(false);
   };
 
   return (
@@ -124,28 +116,37 @@ const Recovery = () => {
       <Head>
         <title>Account Recovery | Arcton</title>
       </Head>
-    <section className="wrapper bg-light">
-      <div className="container pb-14 pb-md-16">
-        <div className="row">
-          <div className="col-lg-7 col-xl-6 col-xxl-5 mx-auto">
-            <div className="col-3 my-10 ps-3">
-            <Image src={companyLogo} alt="Arcton" />
-          </div>
+      <section className="wrapper bg-light">
+        <div className="container pb-14 pb-md-16">
+          <div className="row">
+            <div className="col-lg-7 col-xl-6 col-xxl-5 mx-auto">
+              <div className="col-3 my-10 ps-3">
+                <Image src={companyLogo} alt="Arcton" />
+              </div>
 
-          <div className="card">
-            <div className="card-body p-11">
-                <h2 className="mb-2 text-start">Reset your password</h2>
-                <p className="mt-2 mb-4 col-12">
-                    Enter the email address associated with your account, and we'll send you a link to reset your password.
-                </p>
-                <form 
-                  method="post"
-                  className="text-start mb-3"
-                  onSubmit={onSubmit}
-                >
-                  <input value={csrfToken} id="csrf_token" type="hidden" />
-                  <div className="form-floating mb-6">
-                    <input
+              <div className="card">
+                <div className="card-body p-11">
+                  <h2 className="mb-2 text-start">Reset your password</h2>
+
+                  {isSent ? (
+                    <div className="alert alert-success">
+                      An email containing a recovery link has been sent to the
+                      email address you provided.
+                    </div>
+                  ) : (
+                    <p className={`mt-2 mb-4 row-1`}>
+                      Enter an email address associated with your account and we
+                      will send you a link to reset your password.
+                    </p>
+                  )}
+                  <form
+                    method="post"
+                    className="text-start mb-3"
+                    onSubmit={onSubmit}
+                  >
+                    <input value={csrfToken} id="csrf_token" type="hidden" />
+                    <div className="form-floating mb-6">
+                      <input
                         ref={emailRef}
                         id="email"
                         name="email"
@@ -155,32 +156,23 @@ const Recovery = () => {
                         placeholder="Enter your email address"
                       />
                       <label htmlFor="email">Email</label>
-                  </div>
-                  
-                  <button
-                    className="btn btn-primary w-100 mb-2"
-                    tabIndex={2}
-                    type="submit"
-                  >
-                    <span>Reset Password</span>
-                  </button>
-                  
-                </form>
+                    </div>
 
-                <Link href="/auth/login">
-                  <a className="d-block text-center w-100 mb-2 fs-15">
-                    Return to Sign-In
-                  </a>
-                </Link>
+                    {SubmitButton(isBusy)}
+                  </form>
+
+                  <Link href="/auth/login">
+                    <a className="d-block text-center w-100 mb-2 fs-15">
+                      Return to Sign-In
+                    </a>
+                  </Link>
+                </div>
               </div>
-          </div>
-
-
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-  </main>
+      </section>
+    </main>
   );
 };
 
