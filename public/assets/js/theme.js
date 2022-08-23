@@ -11,9 +11,9 @@ var theme = {
     //theme.subMenu();
     //theme.offCanvas();
     theme.isotope();
-    theme.onepageHeaderOffset();
+    //theme.onepageHeaderOffset();
     theme.anchorSmoothScroll();
-    theme.svgInject();
+    //theme.svgInject();
     theme.backgroundImage();
     theme.backgroundImageMobile();
     theme.imageHoverOverlay();
@@ -512,6 +512,7 @@ var theme = {
    */
   pageProgress: function () {
     var progressWrap = document.querySelector('.progress-wrap');
+    if(!progressWrap) return;
     var progressPath = document.querySelector('.progress-wrap path');
     var pathLength = progressPath.getTotalLength();
     var offset = 50;
@@ -736,4 +737,3 @@ var theme = {
     }
   },
 }
-theme.init();
