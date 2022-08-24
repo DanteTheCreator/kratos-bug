@@ -5,6 +5,17 @@
 @import url('../public/css/vendor/scrollcue.css');
 @import url('../public/css/vendor/swiper-bundle.min.css'); */
 
+body {
+    height: 100%;
+    
+}
+
 div#__next {
+    flex-direction: column;
     height:100%;
+    display:flex;
+}
+
+main {
+    flex-shrink: 0;
 }

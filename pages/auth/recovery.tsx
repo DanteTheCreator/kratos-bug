@@ -12,9 +12,7 @@ import { useSelector } from "react-redux";
 import { AxiosError } from "axios";
 import { UiNode } from "../../typescript/interfaces";
 import SubmitButton from "../../components/SubmitButton";
-import Footer from "../../components/FooterLayout";
-
-
+import { WithFooter } from "../../components/SingleLineFooter";
 
 const Recovery = () => {
   const emailRef = useRef<HTMLInputElement>(null);
@@ -177,14 +175,7 @@ const Recovery = () => {
   );
 };
 
-Recovery.getLayout = function (page: ReactElement) {
-  return (
-    <>
-    <div>{page}</div>
-    <Footer></Footer>
-        </>
-  )
-}
+Recovery.getLayout = WithFooter("mx-auto");
 
 
 export default Recovery;

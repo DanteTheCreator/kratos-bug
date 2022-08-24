@@ -10,7 +10,7 @@ const Dashboard = () => {
         <div className="col-lg-6">
           <h2 className="display-4 mb-3">Welcome</h2>
           
-          <p className="mb-6">Thanks for signing up. Currently there is not much to show here. We're hard at work developing our marketplace and will be releasing a new version soon.</p>
+          <p className="mb-6">Thanks for signing up. Currently there is not much to show here. We&apos;re hard at work developing our marketplace and will be releasing a new version soon.</p>
           
         </div>
       </div>

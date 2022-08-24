@@ -9,7 +9,7 @@ import { SubmitSelfServiceLoginFlowBody } from "@ory/client";
 import SubmitButton from "../../components/SubmitButton";
 import ErrorMessage from "../../components/ErrorMessage";
 import { IResponse } from "../../typescript/interfaces";
-import Footer from "../../components/FooterLayout";
+import { WithFooter } from "../../components/SingleLineFooter";
 
 const Signin = () => {
   const router = useRouter();
@@ -152,13 +152,6 @@ const Signin = () => {
   );
 };
 
-Signin.getLayout = function (page: ReactElement) {
-  return (
-    <>
-    <div>{page}</div>
-    <Footer></Footer>
-        </>
-  )
-}
+Signin.getLayout = WithFooter("mx-auto");
 
 export default Signin;
