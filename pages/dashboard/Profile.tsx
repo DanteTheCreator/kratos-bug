@@ -27,70 +27,70 @@ const Profile: NextPage = () => {
     callback: Function
   ) => {};
 
-  useEffect(() => {
-    // If the router is not ready yet, or we already have a flow, do nothing.
-    if (!router.isReady || flow) {
-      return;
-    }
+  // useEffect(() => {
+  //   // If the router is not ready yet, or we already have a flow, do nothing.
+  //   if (!router.isReady || flow) {
+  //     return;
+  //   }
 
-    // If ?flow=.. was in the URL, we fetch it
-    if (flowId) {
-      ory
-        .getSelfServiceSettingsFlow(String(flowId))
-        .then(({ data }: { data: SelfServiceSettingsFlow }) => {
-          setFlow(data);
-          setCsrfToken(
-            (
-              data.ui.nodes.find(
-                (x) => (x.attributes as any).name == "csrf_token"
-              )?.attributes as any
-            ).value
-          );
-        })
-        .catch(handleFlowError(router, "settings", setFlow));
-      return;
-    }
+  //   // If ?flow=.. was in the URL, we fetch it
+  //   if (flowId) {
+  //     ory
+  //       .getSelfServiceSettingsFlow(String(flowId))
+  //       .then(({ data }: { data: SelfServiceSettingsFlow }) => {
+  //         setFlow(data);
+  //         setCsrfToken(
+  //           (
+  //             data.ui.nodes.find(
+  //               (x) => (x.attributes as any).name == "csrf_token"
+  //             )?.attributes as any
+  //           ).value
+  //         );
+  //       })
+  //       .catch(handleFlowError(router, "settings", setFlow));
+  //     return;
+  //   }
 
-    // Otherwise we initialize it
-    ory
-      .initializeSelfServiceSettingsFlowForBrowsers(
-        returnTo ? String(returnTo) : undefined
-      )
-      .then(({ data }: { data: SelfServiceSettingsFlow }) => {
-        setFlow(data);
-      })
-      .catch(handleFlowError(router, "settings", setFlow));
-  }, [ory, flowId, router, router.isReady, returnTo, flow]);
+  //   // Otherwise we initialize it
+  //   ory
+  //     .initializeSelfServiceSettingsFlowForBrowsers(
+  //       returnTo ? String(returnTo) : undefined
+  //     )
+  //     .then(({ data }: { data: SelfServiceSettingsFlow }) => {
+  //       setFlow(data);
+  //     })
+  //     .catch(handleFlowError(router, "settings", setFlow));
+  // }, [ory, flowId, router, router.isReady, returnTo, flow]);
 
-  const onSubmit = (event: any) => {
-    event.preventDefault();
-    setIsBusy(true);
-    const body: SubmitSelfServiceSettingsFlowBody = {
-      csrf_token: event.target.csrf_token.value,
-      password: event.target.password.value,
-      method: "password",
-    };
+  // const onSubmit = (event: any) => {
+  //   event.preventDefault();
+  //   setIsBusy(true);
+  //   const body: SubmitSelfServiceSettingsFlowBody = {
+  //     csrf_token: event.target.csrf_token.value,
+  //     password: event.target.password.value,
+  //     method: "password",
+  //   };
 
-    ory
-      .submitSelfServiceSettingsFlow(String(flow?.id), body)
-      .then(({ data }: { data: SelfServiceSettingsFlow }) => {
-        // The settings have been saved and the flow was updated. Let's show it to the user!
-        console.log(data);
-        setFlow(data);
-      })
-      .catch(handleFlowError(router, "settings", setFlow))
-      .catch(async (err: AxiosError<any, any>) => {
-        // If the previous handler did not catch the error it's most likely a form validation error
-        if (err.response?.status === 400) {
-          // Yup, it is!
-          setFlow(err.response?.data);
-          return;
-        }
+  //   ory
+  //     .submitSelfServiceSettingsFlow(String(flow?.id), body)
+  //     .then(({ data }: { data: SelfServiceSettingsFlow }) => {
+  //       // The settings have been saved and the flow was updated. Let's show it to the user!
+  //       console.log(data);
+  //       setFlow(data);
+  //     })
+  //     .catch(handleFlowError(router, "settings", setFlow))
+  //     .catch(async (err: AxiosError<any, any>) => {
+  //       // If the previous handler did not catch the error it's most likely a form validation error
+  //       if (err.response?.status === 400) {
+  //         // Yup, it is!
+  //         setFlow(err.response?.data);
+  //         return;
+  //       }
 
-        return Promise.reject(err);
-      });
-    setIsBusy(false);
-  };
+  //       return Promise.reject(err);
+  //     });
+  //   setIsBusy(false);
+  // };
   return (
     <>
       <Head>
