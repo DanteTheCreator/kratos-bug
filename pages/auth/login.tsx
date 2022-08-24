@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { ReactElement, useEffect, useRef, useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,6 +9,7 @@ import { SubmitSelfServiceLoginFlowBody } from "@ory/client";
 import SubmitButton from "../../components/SubmitButton";
 import ErrorMessage from "../../components/ErrorMessage";
 import { IResponse } from "../../typescript/interfaces";
+import Footer from "../../components/FooterLayout";
 
 const Signin = () => {
   const router = useRouter();
@@ -150,5 +151,14 @@ const Signin = () => {
     </main>
   );
 };
+
+Signin.getLayout = function (page: ReactElement) {
+  return (
+    <>
+    <div>{page}</div>
+    <Footer></Footer>
+        </>
+  )
+}
 
 export default Signin;

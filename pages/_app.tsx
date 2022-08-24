@@ -8,7 +8,10 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import Script from 'next/script'
 import { Provider} from 'react-redux'
-function MyApp({ Component, pageProps }: AppProps) {
+import {AppPropsWithLayout} from '../components/FooterLayout'
+function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+  const getLayout = Component.getLayout ?? ((page) => page)
+
   return (
 
     <Provider store={store}>
@@ -17,7 +20,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="shortcut icon" href="/assets/img/favicon.png" />
       </Head>
-      <Component {...pageProps} />
+      {
+  getLayout(
+    <Component {...pageProps} />
+  )}
+
       <Script src="/assets/js/theme.js" strategy="afterInteractive"></Script>
       <Script src="/assets/js/plugins.js" strategy="afterInteractive" onLoad={() => theme.init()}></Script>
       
@@ -26,3 +33,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 }
  
 export default MyApp
+function getLayout(arg0: JSX.Element): import("react").ReactNode {
+  throw new Error('Function not implemented.')
+}
+
