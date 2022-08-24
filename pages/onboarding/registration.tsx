@@ -7,6 +7,8 @@ import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { IResponse } from "../../typescript/interfaces";
 import {SubmitSelfServiceRegistrationFlowWithPasswordMethodBody} from '@ory/client'
+import type { ReactElement } from 'react';
+import Footer, {NextPageWithLayout} from "../../components/footerLayout";
 
 const Register = () => {
   const router = useRouter();
@@ -88,7 +90,7 @@ const Register = () => {
         <title>Registration | Arcton</title>
       </Head>
 
-      <section className="wrapper bg-light">
+      <section className="wrapper bg-light mb-5">
         <div className="container py-14 py-md-16">
           <div className="row">
             <div className="col">
@@ -216,5 +218,14 @@ const SubmitButton = (isBusy: Boolean) => {
     </button>
   );
 };
+
+Register.getLayout = function (page: ReactElement) {
+  return (
+    <>
+    <div>{page}</div>
+    <Footer></Footer>
+        </>
+  )
+}
 
 export default Register;

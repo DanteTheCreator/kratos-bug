@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { ReactNode, useEffect, useRef, useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,8 +9,12 @@ import { SubmitSelfServiceLoginFlowBody } from "@ory/client";
 import SubmitButton from "../../components/SubmitButton";
 import ErrorMessage from "../../components/ErrorMessage";
 import { IResponse } from "../../typescript/interfaces";
+import type { ReactElement } from 'react';
+import Footer, {NextPageWithLayout} from "../../components/footerLayout";
 
-const Signin = () => {
+
+
+const Signin: NextPageWithLayout = () => {
   const router = useRouter();
   const { ory } = useSelector((state: any) => state.auth);
   const [csrfToken, setCsrfToken] = useState<string>();
@@ -73,7 +77,11 @@ const Signin = () => {
       });
   };
 
+
+
+
   return (
+    <>
     <main>
       <Head>
         <title>Login | Arcton</title>
@@ -148,7 +156,19 @@ const Signin = () => {
         </div>
       </section>
     </main>
+    </>
   );
+
+
 };
+
+Signin.getLayout = function (page: ReactElement) {
+  return (
+    <>
+    <div>{page}</div>
+    <Footer></Footer>
+        </>
+  )
+}
 
 export default Signin;

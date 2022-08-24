@@ -12,7 +12,8 @@ import { useSelector } from "react-redux";
 import { AxiosError } from "axios";
 import { UiNode } from "../../typescript/interfaces";
 import SubmitButton from "../../components/SubmitButton";
-
+import type { ReactElement } from 'react';
+import Footer, {NextPageWithLayout} from "../../components/footerLayout";
 
 
 const Recovery = () => {
@@ -176,4 +177,12 @@ const Recovery = () => {
   );
 };
 
+Recovery.getLayout = function (page: ReactElement) {
+  return (
+    <>
+    <div>{page}</div>
+    <Footer></Footer>
+        </>
+  )
+}
 export default Recovery;
