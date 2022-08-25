@@ -16,7 +16,8 @@ import SubmitButton from "../../components/SubmitButton";
 
 
 const Recovery = () => {
-  const emailRef = useRef<HTMLInputElement>(null);
+
+
   const [flow, setFlow] = useState<SelfServiceRecoveryFlow>();
   const { ory } = useSelector((state: any) => state.auth);
   const [csrfToken, setCsrfToken] = useState<string>();
@@ -147,7 +148,6 @@ const Recovery = () => {
                     <input value={csrfToken} id="csrf_token" type="hidden" />
                     <div className="form-floating mb-6">
                       <input
-                        ref={emailRef}
                         id="email"
                         name="email"
                         type="text"
