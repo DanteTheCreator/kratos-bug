@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { ReactElement, useEffect, useRef, useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { IResponse } from "../../typescript/interfaces";
 import {SubmitSelfServiceRegistrationFlowWithPasswordMethodBody} from '@ory/client'
+import Footer from "../../components/FooterLayout";
 
 const Register = () => {
   const router = useRouter();
@@ -216,5 +217,14 @@ const SubmitButton = (isBusy: Boolean) => {
     </button>
   );
 };
+
+Register.getLayout = function (page: ReactElement) {
+  return (
+    <>
+    <div>{page}</div>
+    <Footer></Footer>
+        </>
+  )
+}
 
 export default Register;

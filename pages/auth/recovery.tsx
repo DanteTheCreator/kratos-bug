@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { ReactElement, useEffect, useRef, useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import { AxiosError } from "axios";
 import { UiNode } from "../../typescript/interfaces";
 import SubmitButton from "../../components/SubmitButton";
+import Footer from "../../components/FooterLayout";
 
 
 
@@ -175,5 +176,15 @@ const Recovery = () => {
     </main>
   );
 };
+
+Recovery.getLayout = function (page: ReactElement) {
+  return (
+    <>
+    <div>{page}</div>
+    <Footer></Footer>
+        </>
+  )
+}
+
 
 export default Recovery;
