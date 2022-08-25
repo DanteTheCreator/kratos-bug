@@ -8,7 +8,7 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import Script from 'next/script'
 import { Provider} from 'react-redux'
-import {AppPropsWithLayout} from '../components/FooterLayout'
+import {AppPropsWithLayout} from '../typescript/types'
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page)
 
@@ -33,7 +33,4 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 }
  
 export default MyApp
-function getLayout(arg0: JSX.Element): import("react").ReactNode {
-  throw new Error('Function not implemented.')
-}
 

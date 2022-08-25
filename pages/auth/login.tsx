@@ -9,7 +9,7 @@ import { SubmitSelfServiceLoginFlowBody } from "@ory/client";
 import SubmitButton from "../../components/SubmitButton";
 import ErrorMessage from "../../components/ErrorMessage";
 import { IResponse } from "../../typescript/interfaces";
-import Footer from "../../components/FooterLayout";
+import Footer from "../../components/SingleLineFooter";
 
 const Signin = () => {
   const router = useRouter();
@@ -156,7 +156,7 @@ Signin.getLayout = function (page: ReactElement) {
   return (
     <>
     <div>{page}</div>
-    <Footer></Footer>
+    {Footer}
         </>
   )
 }

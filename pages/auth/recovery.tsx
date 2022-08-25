@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 import { AxiosError } from "axios";
 import { UiNode } from "../../typescript/interfaces";
 import SubmitButton from "../../components/SubmitButton";
-import Footer from "../../components/FooterLayout";
+import Footer from "../../components/SingleLineFooter";
 
 
 
@@ -181,7 +181,7 @@ Recovery.getLayout = function (page: ReactElement) {
   return (
     <>
     <div>{page}</div>
-    <Footer></Footer>
+    {Footer}
         </>
   )
 }

@@ -1,20 +1,16 @@
 import styles from '../styles/footerLayout.module.css';
 import Link from 'next/link';
-import type { ReactElement, ReactNode } from 'react'
-import type { NextPage } from 'next'
-import type { AppProps } from 'next/app'
+import { NextPageWithLayout, AppPropsWithLayout } from '../typescript/types';
+import { ReactElement } from 'react';
 
 
-export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
-    getLayout?: (page: ReactElement) => ReactNode
-  }
-  
-  export type AppPropsWithLayout = AppProps & {
-    Component: NextPageWithLayout
-  }
-  
+type FooterProps = {
+    extraStyles: string;
+}
 
-const Footer = () => {
+
+export const WithFooter = (extraStyles: FooterProps) => {
+    return function (page: ReactElement) {
     
     return (
         <footer className="d-flex justify-content-center row">
@@ -29,5 +25,6 @@ const Footer = () => {
        
     )
 }
+}
 
-export default Footer
+export default WithFooter

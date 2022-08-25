@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { IResponse } from "../../typescript/interfaces";
 import {SubmitSelfServiceRegistrationFlowWithPasswordMethodBody} from '@ory/client'
-import Footer from "../../components/FooterLayout";
+import Footer from "../../components/SingleLineFooter";
 
 const Register = () => {
   const router = useRouter();
@@ -222,7 +222,7 @@ Register.getLayout = function (page: ReactElement) {
   return (
     <>
     <div>{page}</div>
-    <Footer></Footer>
+  {Footer}
         </>
   )
 }
