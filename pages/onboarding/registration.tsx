@@ -144,6 +144,24 @@ const Register = () => {
                           />
                           <label htmlFor="signUpEmail">Email</label>
                         </div>
+                        <div>
+                          <input type="checkbox" id=""/>
+                          <label htmlFor="s"> </label>
+                        </div>
+                        <div className="form-check">
+                          <input
+                          className="form-check-input"
+                          type="checkbox"
+                          value=""
+                          id="flexCheckDefault"
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="flexCheckDefault"
+                        >
+                          <Link href="">Accept TOS</Link>
+                        </label>
+                        </div>
                         <div className="form-floating password-field mb-4">
                           <input
                             type="password"
@@ -222,7 +240,7 @@ Register.getLayout = function (page: ReactElement) {
   return (
     <>
     <div>{page}</div>
-  {Footer}
+    <Footer extraStyles="" />
         </>
   )
 }

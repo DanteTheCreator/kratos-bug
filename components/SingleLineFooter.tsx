@@ -10,7 +10,6 @@ type FooterProps = {
 
 
 export const WithFooter = (extraStyles: FooterProps) => {
-    return function (page: ReactElement) {
     
     return (
         <footer className="d-flex justify-content-center row">
@@ -24,7 +23,7 @@ export const WithFooter = (extraStyles: FooterProps) => {
         </footer>
        
     )
-}
+
 }
 
 export default WithFooter

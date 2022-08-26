@@ -181,7 +181,7 @@ Recovery.getLayout = function (page: ReactElement) {
   return (
     <>
     <div>{page}</div>
-    {Footer}
+    <Footer extraStyles="" />
         </>
   )
 }
