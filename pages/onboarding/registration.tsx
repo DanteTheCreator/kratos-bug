@@ -144,11 +144,7 @@ const Register = () => {
                           />
                           <label htmlFor="signUpEmail">Email</label>
                         </div>
-                        <div>
-                          <input type="checkbox" id=""/>
-                          <label htmlFor="s"> </label>
-                        </div>
-                        <div className="form-check">
+                        <div className="form-check d-flex justify-content-start align-items-center mb-4">
                           <input
                           className="form-check-input"
                           type="checkbox"
@@ -156,7 +152,7 @@ const Register = () => {
                           id="flexCheckDefault"
                         />
                         <label
-                          className="form-check-label"
+                          className="form-check-label m-2 fs-13"
                           htmlFor="flexCheckDefault"
                         >
                           <Link href="">Accept TOS</Link>
@@ -177,6 +173,32 @@ const Register = () => {
                           <label htmlFor="signUpPassword">Password</label>
                         </div>
 
+                        <div className="card-header p-0 border-bottom-0" id="accordion-heading-3-1">
+                          <p className="collapsed fs-13 primary text-danger"
+                            role="button" 
+                            data-bs-toggle="collapse" 
+                            data-bs-target="#accordion-collapse-3-1" 
+                            aria-expanded="false" 
+                            aria-controls="accordion-collapse-3-1">Do you have a referral code?
+                          </p>
+                        </div>
+                        
+                        <div id="accordion-collapse-3-1" 
+                          className="collapse" 
+                          aria-labelledby="accordion-heading-3-1"
+                          data-bs-target="#accordion-3">
+                            <div className="card-body p-0">
+                              <div className="form-floating mb-4">
+                                <input
+                                  type="email"
+                                  className="form-control"
+                                  placeholder="Referral Code"
+                                  id="ReferralCode"
+                                />
+                              <label htmlFor="ReferralCode">Refferal Code</label>
+                              </div>
+                          </div>
+                        </div>
                         {SubmitButton(isBusy)}
                       </form>
 

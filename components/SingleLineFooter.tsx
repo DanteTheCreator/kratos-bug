@@ -13,7 +13,7 @@ export const WithFooter = (extraStyles: FooterProps) => {
     
     return (
         <footer className="d-flex justify-content-center row">
-            <div className="d-flex justify-content-around align-items-center col-sm-8 col-md-4">
+            <div className="d-flex justify-content-around align-items-center col-sm-8 col-md-5 col-lg-4">
                 <Link href="" className={styles.p}> &copy; Arcton</Link>
                 <p className={styles.dot}>.</p>
                 <Link href="" className={styles.p}>Contact</Link>
