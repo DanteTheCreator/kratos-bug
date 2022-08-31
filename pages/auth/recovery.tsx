@@ -14,11 +14,7 @@ import { UiNode } from "../../typescript/interfaces";
 import SubmitButton from "../../components/SubmitButton";
 import Footer from "../../components/SingleLineFooter";
 
-
-
 const Recovery = () => {
-
-
   const [flow, setFlow] = useState<SelfServiceRecoveryFlow>();
   const { ory } = useSelector((state: any) => state.auth);
   const [csrfToken, setCsrfToken] = useState<string>();
@@ -184,7 +180,6 @@ Recovery.getLayout = function (page: ReactElement) {
       <Footer extraStyles="" />
     </>
   );
-}
-
+};
 
 export default Recovery;
