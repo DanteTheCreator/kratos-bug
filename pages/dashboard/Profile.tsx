@@ -42,40 +42,40 @@ const Profile: NextPage = () => {
     console.log(session);
   };
 
-  useEffect(() => {
-    if (!router.isReady || flow) {
-      return;
-    }
+  // useEffect(() => {
+    // if (!router.isReady || flow) {
+    //   return;
+    // }
 
     // If ?flow=.. was in the URL, we fetch it
-    if (flowId) {
-      ory
-        .getSelfServiceSettingsFlow(String(flowId))
-        .then(({ data }: { data: SelfServiceSettingsFlow }) => {
-          setFlow(data);
-          setCsrfToken(
-            (
-              data.ui.nodes.find(
-                (x) => (x.attributes as any).name == "csrf_token"
-              )?.attributes as any
-            ).value
-          );
-        })
-        .catch(handleFlowError(router, "settings", setFlow));
-      return;
-    }
+    // if (flowId) {
+    //   ory
+    //     .getSelfServiceSettingsFlow(String(flowId))
+    //     .then(({ data }: { data: SelfServiceSettingsFlow }) => {
+    //       setFlow(data);
+    //       setCsrfToken(
+    //         (
+    //           data.ui.nodes.find(
+    //             (x) => (x.attributes as any).name == "csrf_token"
+    //           )?.attributes as any
+    //         ).value
+    //       );
+    //     })
+    //     .catch(handleFlowError(router, "settings", setFlow));
+    //   return;
+    // }
 
-    // Otherwise we initialize it
-    ory
-      .initializeSelfServiceSettingsFlowForBrowsers(
-        returnTo ? String(returnTo) : undefined
-      )
-      .then(({ data }: { data: SelfServiceSettingsFlow }) => {
-        setFlow(data);
-        console.log(data);
-      })
-      .catch(handleFlowError(router, "settings", setFlow));
-  }, [ory, router, flow, flowId, returnTo]);
+    // // Otherwise we initialize it
+    // ory
+    //   .initializeSelfServiceSettingsFlowForBrowsers(
+    //     returnTo ? String(returnTo) : undefined
+    //   )
+    //   .then(({ data }: { data: SelfServiceSettingsFlow }) => {
+    //     setFlow(data);
+    //     console.log(data);
+    //   })
+    //   .catch(handleFlowError(router, "settings", setFlow));
+  // }, [ory, router, flow, flowId,]);
 
   return (
     <>

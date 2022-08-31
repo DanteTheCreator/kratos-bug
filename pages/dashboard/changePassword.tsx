@@ -71,6 +71,8 @@ const ChangePassword: NextPage = () => {
     
     event.preventDefault();
     setIsBusy(true);
+
+
     const password =
       event.target.password.value === event.target.password2.value &&
       event.target.password2.value.length > 8
@@ -79,12 +81,12 @@ const ChangePassword: NextPage = () => {
 
     const body: SubmitSelfServiceSettingsFlowWithPasswordMethodBody = {
       csrf_token: event.target.csrf_token.value,
-      password,
       method: "password",
+      password: String(password),
     };
 
     ory
-      .submitSelfServiceSettingsFlow(String(flow?.id), body, undefined, undefined)
+      .submitSelfServiceSettingsFlow(String(flow?.id), body, 'MTY2MTkzMzU0NHxtZXB0azRBcUxEX1diYkd2MG52MDY5a0JDdnhoZl9WRTU1dGlNcE1yd3A5OFlqd2RhMXgwa21DZEI0N3g0UUJGQ3dsTnNLc0pzcHdwQlEtU3NsNEhLNGc3N0xGdzROMjNtOUtYNEVZMElBcVVfbGdiZWRZRDBSd1VvR3RPSmFpRWgwMFRtSEREb2c9PXzDuJoZSCWN_TFyAQej-RSAtd1FW49GnRkWEOuRhktvPg==', )
       .then(({ data }: { data: SelfServiceSettingsFlow }) => {
         // The settings have been saved and the flow was updated. Let's show it to the user!
         console.log(data);
