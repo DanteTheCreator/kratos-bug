@@ -16,7 +16,7 @@ const Signin = () => {
   const { ory } = useSelector((state: any) => state.auth);
   const [csrfToken, setCsrfToken] = useState<string>();
   const [flowId, setFlowId] = useState<string>();
-  const [action, setAction] = useState<string>();
+
   const [errorMessage, setErrorMessage] = useState<string>();
 
   const [isBusy, setIsBusy] = useState<boolean>(false);
@@ -39,7 +39,6 @@ const Signin = () => {
               ).value
             );
             setFlowId(response.data.id);
-            setAction(response.data.ui.action);
           });
       });
   }, [ory, router]);
@@ -95,7 +94,6 @@ const Signin = () => {
                   {ErrorMessage(errorMessage)}
 
                   <form
-                    action={action}
                     method="post"
                     className="text-start mb-3"
                     onSubmit={handleLogin}
@@ -155,10 +153,10 @@ const Signin = () => {
 Signin.getLayout = function (page: ReactElement) {
   return (
     <>
-    <div>{page}</div>
-    {Footer}
-        </>
-  )
-}
+      <div>{page}</div>
+      <Footer extraStyles="" />
+    </>
+  );
+};
 
 export default Signin;

@@ -6,7 +6,7 @@ import companyLogo from "../../public/assets/img/logo.png";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { IResponse } from "../../typescript/interfaces";
-import {SubmitSelfServiceRegistrationFlowWithPasswordMethodBody} from '@ory/client'
+import { SubmitSelfServiceRegistrationFlowWithPasswordMethodBody } from "@ory/client";
 import Footer from "../../components/SingleLineFooter";
 
 const Register = () => {
@@ -59,18 +59,18 @@ const Register = () => {
       .then((response: IResponse) => {
         router.push("/dashboard");
       })
-      
+
       /**
        * !gotta fix the type for reason
        */
-      
+
       .catch((reason: any) => {
         let messages = reason.response.data.ui.nodes
           .map((x: any) => x.messages)
           .flat();
 
         if (messages.length > 0) {
-          setErrorMessage(messages.map((x:any) => x.text).join(" "));
+          setErrorMessage(messages.map((x: any) => x.text).join(" "));
         } else {
           setErrorMessage("");
         }
@@ -103,7 +103,8 @@ const Register = () => {
                     <div className="ms-3">
                       <h5 className="mb-1">Its your turn</h5>
                       <p>
-                        Invest in those shaping tomorrow to build a better future.
+                        Invest in those shaping tomorrow to build a better
+                        future.
                       </p>
                     </div>
                   </div>
@@ -112,7 +113,8 @@ const Register = () => {
                     <div className="ms-3">
                       <h5 className="mb-1">Access to start-ups</h5>
                       <p>
-                        Gain access to early stage start-up investments together with the pros before the rest.
+                        Gain access to early stage start-up investments together
+                        with the pros before the rest.
                       </p>
                     </div>
                   </div>
@@ -133,6 +135,20 @@ const Register = () => {
                           id="csrf_token"
                           type="hidden"
                         />
+                        <div className="form-check">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            value=""
+                            id="flexCheckDefault"
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor="flexCheckDefault"
+                          >
+                            Accept TOS
+                          </label>
+                        </div>
                         <div className="form-floating mb-4">
                           <input
                             type="email"
@@ -221,10 +237,10 @@ const SubmitButton = (isBusy: Boolean) => {
 Register.getLayout = function (page: ReactElement) {
   return (
     <>
-    <div>{page}</div>
-  {Footer}
-        </>
-  )
-}
+      <div>{page}</div>
+      <Footer extraStyles="" />
+    </>
+  );
+};
 
 export default Register;

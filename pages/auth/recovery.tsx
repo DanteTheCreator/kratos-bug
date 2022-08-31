@@ -180,10 +180,10 @@ const Recovery = () => {
 Recovery.getLayout = function (page: ReactElement) {
   return (
     <>
-    <div>{page}</div>
-    {Footer}
-        </>
-  )
+      <div>{page}</div>
+      <Footer extraStyles="" />
+    </>
+  );
 }
 
 
