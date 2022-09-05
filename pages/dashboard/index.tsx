@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { ReactElement, useEffect, useRef, useState } from "react";
+import WithHeader from '../../components/SingleLineHeader'
+import InnerFooter from "../../components/innerFooter";
 
 const Dashboard = () => {
   return (
@@ -20,4 +22,13 @@ const Dashboard = () => {
   )
 }
 
+Dashboard.getLayout = function (page: ReactElement) {
+  return (
+    <>
+    <WithHeader extraStyles="" />
+    <div>{page}</div>
+    <InnerFooter extraStyles=""/>
+        </>
+  )
+}
 export default Dashboard
