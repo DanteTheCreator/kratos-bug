@@ -3,9 +3,6 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import {
   V0alpha2Api,
   Configuration,
-  Session,
-  Identity,
-  SubmitSelfServiceLoginFlowBody,
 } from "@ory/client";
 
 const basePath = process.env.REACT_APP_ORY_URL || "http://localhost:4433";
@@ -21,14 +18,12 @@ const ory = new V0alpha2Api(
 
 export interface AuthState {
   isLoggedIn: boolean;
-  cookie: string;
   ory: any;
 }
 
 const initialState: AuthState = {
   isLoggedIn: false,
   ory,
-  cookie: "",
 };
 
 export const authSlice = createSlice({
@@ -36,7 +31,6 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     setCookie: (state, action) => {
-      state.cookie = action.payload;
     }
   },
 });

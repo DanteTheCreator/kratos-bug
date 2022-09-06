@@ -10,7 +10,6 @@ import {
   SubmitSelfServiceSettingsFlowWithPasswordMethodBody,
 } from "@ory/client";
 import { AxiosError } from "axios";
-import { setCookie } from "../../redux/authSlice";
 
 const ChangePassword: NextPage = () => {
   const [flow, setFlow] = useState<SelfServiceSettingsFlow>();
@@ -52,9 +51,7 @@ const ChangePassword: NextPage = () => {
         .catch(handleFlowError(router, "settings", setFlow));
       return;
     }
-    ory.toSession().then((response:any) => {
-        setCookie(response.data.id)
-    });
+
     // Otherwise we initialize it
     ory
       .initializeSelfServiceSettingsFlowForBrowsers(
@@ -62,16 +59,14 @@ const ChangePassword: NextPage = () => {
       )
       .then(({ data }: { data: SelfServiceSettingsFlow }) => {
         setFlow(data);
-  
       })
       .catch(handleFlowError(router, "settings", setFlow));
   }, [ory, flowId, router, router.isReady, returnTo, flow]);
 
   const onSubmit = (event: any) => {
-    
+    console.log(flow);
     event.preventDefault();
     setIsBusy(true);
-
 
     const password =
       event.target.password.value === event.target.password2.value &&
@@ -86,7 +81,7 @@ const ChangePassword: NextPage = () => {
     };
 
     ory
-      .submitSelfServiceSettingsFlow(String(flow?.id), body, 'MTY2MTkzMzU0NHxtZXB0azRBcUxEX1diYkd2MG52MDY5a0JDdnhoZl9WRTU1dGlNcE1yd3A5OFlqd2RhMXgwa21DZEI0N3g0UUJGQ3dsTnNLc0pzcHdwQlEtU3NsNEhLNGc3N0xGdzROMjNtOUtYNEVZMElBcVVfbGdiZWRZRDBSd1VvR3RPSmFpRWgwMFRtSEREb2c9PXzDuJoZSCWN_TFyAQej-RSAtd1FW49GnRkWEOuRhktvPg==', )
+      .submitSelfServiceSettingsFlow(String(flow?.id), body)
       .then(({ data }: { data: SelfServiceSettingsFlow }) => {
         // The settings have been saved and the flow was updated. Let's show it to the user!
         console.log(data);

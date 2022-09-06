@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { IResponse } from "../../typescript/interfaces";
 import { SubmitSelfServiceRegistrationFlowWithPasswordMethodBody } from "@ory/client";
 import Footer from "../../components/SingleLineFooter";
+import SubmitButton from "../../components/SubmitButton";
 
 const Register = () => {
   const router = useRouter();
@@ -135,20 +136,7 @@ const Register = () => {
                           id="csrf_token"
                           type="hidden"
                         />
-                        <div className="form-check">
-                          <input
-                            className="form-check-input"
-                            type="checkbox"
-                            value=""
-                            id="flexCheckDefault"
-                          />
-                          <label
-                            className="form-check-label"
-                            htmlFor="flexCheckDefault"
-                          >
-                            Accept TOS
-                          </label>
-                        </div>
+                    
                         <div className="form-floating mb-4">
                           <input
                             type="email"
@@ -253,36 +241,7 @@ const ErrorMessage = (message: string | undefined) => {
   return <div className="alert alert-danger">{message}</div>;
 };
 
-const SubmitButton = (isBusy: Boolean) => {
-  if (!isBusy) {
-    return (
-      <button
-        className="btn btn-primary btn-login w-100 mb-2"
-        tabIndex={3}
-        type="submit"
-      >
-        <span>Sign-up</span>
-      </button>
-    );
-  }
 
-  return (
-    <button
-      className="btn btn-primary btn-login w-100 mb-2"
-      tabIndex={3}
-      type="submit"
-      disabled
-    >
-      <span
-        className="spinner-border spinner-border-sm"
-        role="status"
-        aria-hidden="true"
-      ></span>
-      &nbsp;&nbsp;
-      <span>Sign-up</span>
-    </button>
-  );
-};
 
 Register.getLayout = function (page: ReactElement) {
   return (

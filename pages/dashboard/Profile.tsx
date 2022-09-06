@@ -7,7 +7,6 @@ import React from "react";
 import SubmitButton from "../../components/SubmitButton";
 import {
   SelfServiceSettingsFlow,
-  SubmitSelfServiceSettingsFlowBody,
 } from "@ory/client";
 import { AxiosError } from "axios";
 import Card from "../../components/Card";
@@ -39,7 +38,8 @@ const Profile: NextPage = () => {
 
   const handleChangeEmail = async () => {
     const session = await ory.toSession();
-    console.log(session);
+    console.log(session)
+    console.log(flow)
   };
 
   // useEffect(() => {
