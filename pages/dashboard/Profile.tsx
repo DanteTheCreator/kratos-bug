@@ -5,9 +5,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import React from "react";
 import SubmitButton from "../../components/SubmitButton";
-import {
-  SelfServiceSettingsFlow,
-} from "@ory/client";
+import { SelfServiceSettingsFlow } from "@ory/client";
 import { AxiosError } from "axios";
 import Card from "../../components/Card";
 
@@ -38,43 +36,43 @@ const Profile: NextPage = () => {
 
   const handleChangeEmail = async () => {
     const session = await ory.toSession();
-    console.log(session)
-    console.log(flow)
+    console.log(session);
+    console.log(flow);
   };
 
   // useEffect(() => {
-    // if (!router.isReady || flow) {
-    //   return;
-    // }
+  // if (!router.isReady || flow) {
+  //   return;
+  // }
 
-    // If ?flow=.. was in the URL, we fetch it
-    // if (flowId) {
-    //   ory
-    //     .getSelfServiceSettingsFlow(String(flowId))
-    //     .then(({ data }: { data: SelfServiceSettingsFlow }) => {
-    //       setFlow(data);
-    //       setCsrfToken(
-    //         (
-    //           data.ui.nodes.find(
-    //             (x) => (x.attributes as any).name == "csrf_token"
-    //           )?.attributes as any
-    //         ).value
-    //       );
-    //     })
-    //     .catch(handleFlowError(router, "settings", setFlow));
-    //   return;
-    // }
+  // If ?flow=.. was in the URL, we fetch it
+  // if (flowId) {
+  //   ory
+  //     .getSelfServiceSettingsFlow(String(flowId))
+  //     .then(({ data }: { data: SelfServiceSettingsFlow }) => {
+  //       setFlow(data);
+  //       setCsrfToken(
+  //         (
+  //           data.ui.nodes.find(
+  //             (x) => (x.attributes as any).name == "csrf_token"
+  //           )?.attributes as any
+  //         ).value
+  //       );
+  //     })
+  //     .catch(handleFlowError(router, "settings", setFlow));
+  //   return;
+  // }
 
-    // // Otherwise we initialize it
-    // ory
-    //   .initializeSelfServiceSettingsFlowForBrowsers(
-    //     returnTo ? String(returnTo) : undefined
-    //   )
-    //   .then(({ data }: { data: SelfServiceSettingsFlow }) => {
-    //     setFlow(data);
-    //     console.log(data);
-    //   })
-    //   .catch(handleFlowError(router, "settings", setFlow));
+  // // Otherwise we initialize it
+  // ory
+  //   .initializeSelfServiceSettingsFlowForBrowsers(
+  //     returnTo ? String(returnTo) : undefined
+  //   )
+  //   .then(({ data }: { data: SelfServiceSettingsFlow }) => {
+  //     setFlow(data);
+  //     console.log(data);
+  //   })
+  //   .catch(handleFlowError(router, "settings", setFlow));
   // }, [ory, router, flow, flowId,]);
 
   return (

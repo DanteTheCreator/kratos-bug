@@ -34,31 +34,21 @@ const ChangePassword: NextPage = () => {
       return;
     }
 
-    // If ?flow=.. was in the URL, we fetch it
-    if (flowId) {
-      ory
-        .getSelfServiceSettingsFlow(String(flowId))
-        .then(({ data }: { data: SelfServiceSettingsFlow }) => {
-          setFlow(data);
-          setCsrfToken(
-            (
-              data.ui.nodes.find(
-                (x) => (x.attributes as any).name == "csrf_token"
-              )?.attributes as any
-            ).value
-          );
-        })
-        .catch(handleFlowError(router, "settings", setFlow));
-      return;
-    }
+   
 
     // Otherwise we initialize it
     ory
       .initializeSelfServiceSettingsFlowForBrowsers(
-        returnTo ? String(returnTo) : undefined
+        returnTo ? String(returnTo) : undefined , {credentials: 'include'}
       )
       .then(({ data }: { data: SelfServiceSettingsFlow }) => {
         setFlow(data);
+        setCsrfToken(
+            (
+              data.ui.nodes.find(
+                (x) => (x.attributes as any).name == "csrf_token"
+              )?.attributes as any
+            ).value);
       })
       .catch(handleFlowError(router, "settings", setFlow));
   }, [ory, flowId, router, router.isReady, returnTo, flow]);
@@ -81,7 +71,7 @@ const ChangePassword: NextPage = () => {
     };
 
     ory
-      .submitSelfServiceSettingsFlow(String(flow?.id), body)
+      .submitSelfServiceSettingsFlow(String(flow?.id), body, undefined, undefined, {credentials: 'include'})
       .then(({ data }: { data: SelfServiceSettingsFlow }) => {
         // The settings have been saved and the flow was updated. Let's show it to the user!
         console.log(data);

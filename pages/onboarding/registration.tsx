@@ -62,9 +62,9 @@ const Register = () => {
       })
 
       /**
-       * !gotta fix the type for reason
+       * ! gotta fix the type for reason
+       * ? do it later
        */
-
       .catch((reason: any) => {
         let messages = reason.response.data.ui.nodes
           .map((x: any) => x.messages)
@@ -136,7 +136,7 @@ const Register = () => {
                           id="csrf_token"
                           type="hidden"
                         />
-                    
+
                         <div className="form-floating mb-4">
                           <input
                             type="email"
@@ -240,8 +240,6 @@ const ErrorMessage = (message: string | undefined) => {
   }
   return <div className="alert alert-danger">{message}</div>;
 };
-
-
 
 Register.getLayout = function (page: ReactElement) {
   return (
