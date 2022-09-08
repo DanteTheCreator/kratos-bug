@@ -1,4 +1,24 @@
-.anchor a {
-    color: gray!important;
-    background-color: blue;
+.anchor:hover {
+    color: white!important;
+    background-color: #e9594b;
+    transition: 0.2s;
+    border-radius: 7px;
+}
+
+.anchor:hover a{
+    color: white!important;
+    transition: 0.2s;
+}
+
+.hamburger {
+    cursor: pointer;
+    background-color: gray;
+    color: white;
+    border: none;
+    border-radius: 7px;;
+}
+
+.topLine {
+ background-color: #e9594b!important;
+ width: 0.5rem;
 }

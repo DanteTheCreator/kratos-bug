@@ -18,7 +18,7 @@ const Dashboard = () => {
         </div>
 
         <div className="row">
-          <div className="col-sm-12 col-md-5 m-md-2 border rounded">
+          <div className="col-sm-12 col-lg-5 col-xl-5 m-md-2 border rounded">
             <div className="p-2">
               <h4>Your Identity</h4>
               <div className="d-flex justify-content-around p-2">
@@ -32,7 +32,7 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className={`${styles.transaction}col-sm-12 col-md-5 m-md-2 border rounded`}>
+          <div className={`${styles.transaction}col-sm-12 col-lg-5 col-xl-5 m-md-2 border rounded`}>
             <div className="p-2">
               <h4>Transaction</h4>
               <div>
@@ -41,7 +41,7 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="col-sm-10 col-md-5 m-2 border rounded">
+          <div className="col-sm-12 col-lg-5 col-xl-5 m-2 border rounded">
             <div className="p-2">
               <h4>Security</h4>
               <div className="d-flex justify-content-around align-items-center p-2">
@@ -51,7 +51,7 @@ const Dashboard = () => {
             </div>        
           </div>
 
-          <div className="col-sm-9 col-md-5 m-2 border rounded">
+          <div className="col-sm-12 col-lg-5 col-xl-5 m-2 border rounded">
             <div className="p-2">
             <h4>Wallet & Payment Methods</h4>
             </div>
@@ -68,10 +68,10 @@ Dashboard.getLayout = function (page: ReactElement) {
   return (
     <>
       <div className="row">
-        <div className="col-md-2 col-12 mt-12">
+        <div className="col-12 col-lg-3 col-xl-2 col-xxl-2 col-12 mt-12">
         <WithHeader extraStyles="" />
         </div>
-        <div className="col-md-10 col-12">
+        <div className="col-12 col-lg-9 col-col-xl-10 col-xxl-10 col-12">
           <div>{page}</div>
         </div>
         <div className="mt-16">
