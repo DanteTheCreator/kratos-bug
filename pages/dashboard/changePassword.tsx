@@ -54,7 +54,6 @@ const ChangePassword: NextPage = () => {
   }, [ory, flowId, router, router.isReady, returnTo, flow]);
 
   const onSubmit = (event: any) => {
-    console.log(flow);
     event.preventDefault();
     setIsBusy(true);
 
@@ -69,12 +68,12 @@ const ChangePassword: NextPage = () => {
       method: "password",
       password: String(password),
     };
-
+    console.log(body);
     ory
       .submitSelfServiceSettingsFlow(String(flow?.id), body, undefined, undefined, {credentials: 'include'})
       .then(({ data }: { data: SelfServiceSettingsFlow }) => {
         // The settings have been saved and the flow was updated. Let's show it to the user!
-        console.log(data);
+        
         setFlow(data);
       })
       .catch(handleFlowError(router, "settings", setFlow))
