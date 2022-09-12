@@ -98,7 +98,7 @@ const Profile: NextPage = () => {
         <title>Arcton | Change Password</title>
       </Head>
       <section>
-        <form method="post" onSubmit={onSubmit}>
+        <form method="post">
           <input value={csrfToken} id="csrf_token" type="hidden" />
           <div className="form-floating mb-4">
             {isSent ? (

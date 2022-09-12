@@ -10,15 +10,3 @@
     transition: 0.2s;
 }
 
-.hamburger {
-    cursor: pointer;
-    background-color: gray;
-    color: white;
-    border: none;
-    border-radius: 7px;;
-}
-
-.topLine {
- background-color: #e9594b!important;
- width: 0.5rem;
-}

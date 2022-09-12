@@ -5,7 +5,7 @@ import styles from "../../styles/index.module.css";
 
 const Dashboard = () => {
   return (
-    <section id="snippet-1" className="wrapper bg-light">
+    <section id="snippet-1" className="wrapper bg-gray">
     <div className="container pt-15 pt-md-12 pb-13 pb-md-15">
       <div className="row gx-lg-8 gx-xl-12 gy-10 justify-content-start">
         
@@ -18,42 +18,43 @@ const Dashboard = () => {
         </div>
 
         <div className="row">
-          <div className="col-sm-12 col-lg-5 col-xl-5 m-md-2 border rounded">
+          <div className="col-sm-12 col-lg-5 col-xl-5 m-2 rounded bg-light shadow-lg">
             <div className="p-2">
-              <h4>Your Identity</h4>
+              <h4 className="text-red">Your Identity</h4>
               <div className="d-flex justify-content-around p-2">
                 <h6>Your Email:</h6>
-                <div className="bg-success p-2 text-white rounded">Verified</div>
+                <div className="bg-green p-2 text-white rounded">Verified</div>
               </div>
               <div className="d-flex justify-content-around align-items-center p-2">
                 <h6>KYC</h6>
-                <div className="bg-secondary p-2 text-white rounded">Not Completed</div>
+                <div className="bg-ash p-2 text-white rounded">Not Completed</div>
               </div>
             </div>
           </div>
 
-          <div className={`${styles.transaction}col-sm-12 col-lg-5 col-xl-5 m-md-2 border rounded`}>
+          <div className={`${styles.transaction}col-sm-12 col-lg-5 col-xl-5 m-2 rounded bg-light shadow-lg`}>
             <div className="p-2">
-              <h4>Transaction</h4>
-              <div>
+              <h4 className="text-red">Transaction</h4>
+
+            </div>
+            <div className="">
                 Find your first investment
               </div>
-            </div>
           </div>
 
-          <div className="col-sm-12 col-lg-5 col-xl-5 m-2 border rounded">
+          <div className="col-sm-12 col-lg-5 col-xl-5 m-2 rounded bg-light shadow-lg">
             <div className="p-2">
-              <h4>Security</h4>
+              <h4 className="text-red">Security</h4>
               <div className="d-flex justify-content-around align-items-center p-2">
                 <h6>2FA status</h6>
-                <div className="bg-secondary p-2 text-white rounded">2FA disabled</div>
+                <div className="bg-ash p-2 text-white rounded">2FA disabled</div>
               </div>
             </div>        
           </div>
 
-          <div className="col-sm-12 col-lg-5 col-xl-5 m-2 border rounded">
+          <div className="col-sm-12 col-lg-5 col-xl-5 m-2 rounded bg-light shadow-lg">
             <div className="p-2">
-            <h4>Wallet & Payment Methods</h4>
+            <h4 className="text-red">Wallet & Payment Methods</h4>
             </div>
           </div>
         </div>
@@ -67,14 +68,14 @@ const Dashboard = () => {
 Dashboard.getLayout = function (page: ReactElement) {
   return (
     <>
-      <div className="row">
-        <div className="col-12 col-lg-3 col-xl-2 col-xxl-2 col-12 mt-12">
+      <div className="row bg-gray">
+        <div className="col-12 col-lg-3 col-xl-2 col-xxl-2 col-12 mt-12 bg-gray">
         <WithHeader extraStyles="" />
         </div>
         <div className="col-12 col-lg-9 col-col-xl-10 col-xxl-10 col-12">
           <div>{page}</div>
         </div>
-        <div className="mt-16">
+        <div className="mt-17">
         <InnerFooter extraStyles=""/>
         </div>
       </div>
