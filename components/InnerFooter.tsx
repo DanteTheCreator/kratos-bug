@@ -1,6 +1,5 @@
 import styles from '../styles/footerLayout.module.css';
 import Link from 'next/link';
-import { NextPageWithLayout, AppPropsWithLayout } from '../typescript/types';
 import { ReactElement } from 'react';
 
 

@@ -1,18 +1,19 @@
-
 import { NextPage } from "next";
+import React, { ReactElement, useEffect, useRef, useState } from "react";
+import WithHeader from '../../components/SingleLineHeader'
+import InnerFooter from "../../components/InnerFooter";
 import { NextRouter, useRouter } from "next/router";
 import Head from "next/head";
-import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import React from "react";
 import SubmitButton from "../../components/SubmitButton";
 import {
   SelfServiceSettingsFlow,
   SubmitSelfServiceSettingsFlowBody,
 } from "@ory/client";
 import { AxiosError } from "axios";
+import { NextPageWithLayout } from "../../typescript/types";
 
-const Profile: NextPage = () => {
+const Profile: NextPageWithLayout = () => {
   const [flow, setFlow] = useState<SelfServiceSettingsFlow>();
   const { ory } = useSelector((state: any) => state.auth);
   const [csrfToken, setCsrfToken] = useState<string>();
@@ -119,9 +120,96 @@ const Profile: NextPage = () => {
           </div>
         </form>
       </section>
+
+      <section className="wrapper bg-gray">
+        <div className="container pt-15 pt-md-12 pb-13 pb-md-15 px-2">
+          <div className="col-12 col-lg-10 m-2 rounded bg-light shadow-lg p-2">
+            <h1>Profile</h1>
+            <div className="row">
+              <div className="col-5 p-2">
+                  <h6>E-mail:</h6>
+                  <input type="email" placeholder="E-mail" className="w-100 border-0 bg-gray"/>
+              </div>
+
+              <div className="col-12 row">
+                <div className="d-flex justify-content-between align-items-center col-5 col-md-4 col-lg-3">
+                 <h6>Status:</h6>
+                  <div className="bg-green p-2 text-white rounded">Verified</div>
+                </div>
+                <div className="col-1 col-lg-5 col-xl-4"></div>
+                <div className="col-6 col-lg-4 col-xl-3 d-flex justify-content-end">
+                <button className="btn-primary rounded border-0 p-2">Change E-mail</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-12 col-lg-10  m-2 rounded bg-light shadow-lg p-2">
+            <h1>Identity</h1>
+            <div className="row">
+              <div className="col-12 row">
+                <div className="col-5 p-2">
+                    <h6>First Name:</h6>
+                    <input type="email" placeholder="E-mail" className="w-100 border-0 bg-gray"/>
+                </div>
+                <div className="col-5 p-2">
+                    <h6>Last Name:</h6>
+                    <input type="email" placeholder="E-mail" className="w-100 border-0 bg-gray"/>
+                </div>
+
+                <div className="col-5 p-2">
+                    <h6>Date of Birth:</h6>
+                    <input type="date" placeholder="E-mail" className="w-100 border-0 bg-gray"/>
+                </div>
+                <div className="col-5 p-2">
+                    <h6>Nationality:</h6>
+                    <input type="email" placeholder="E-mail" className="w-100 border-0 bg-gray"/>
+                </div>
+                <div className="col-5 p-2">
+                    <h6>Document Nr:</h6>
+                    <input type="email" placeholder="E-mail" className="w-100 border-0 bg-gray"/>
+                </div>
+                <div className="col-5 p-2">
+                    <h6>Expiery Date:</h6>
+                    <input type="Date" placeholder="E-mail" className="w-100 border-0 bg-gray"/>
+                </div>
+              </div>
+
+
+              <div className="col-12 row">
+                <div className="d-flex justify-content-between align-items-center col-5 col-md-4 col-lg-3">
+                 <h6>Status:</h6>
+                  <div className="bg-green p-2 text-white rounded">Verified</div>
+                </div>
+                <div className="col-1 col-lg-5 col-xl-4"></div>
+                <div className="col-6 col-lg-4 col-xl-3 d-flex justify-content-end">
+                <button className="btn-primary rounded border-0 p-2">Submit New KYC</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 };
 
+Profile.getLayout = function (page: ReactElement) {
+  return (
+    <>
+      <div className="row bg-gray">
+        <div className="col-12 col-lg-3 col-xl-2 col-xxl-2 col-12 mt-12 bg-gray">
+        <WithHeader extraStyles="" />
+        </div>
+        <div className="col-12 col-lg-9 col-col-xl-10 col-xxl-10 col-12">
+          <div>{page}</div>
+        </div>
+        <div className="mt-17">
+        <InnerFooter extraStyles=""/>
+        </div>
+      </div>
+    </>
+  )
+}
 export default Profile;
 

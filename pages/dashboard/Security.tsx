@@ -15,7 +15,7 @@ const Security = () => {
               <p>You last Changed your password 20 days ago</p>
             </div>
             <div className="d-flex justify-content-end">
-              <button className="btn-primary rounded border-0 px-2">Change Password</button>
+              <button className="btn-primary rounded border-0 p-2">Change Password</button>
             </div>
           </div>
           <div>
@@ -39,7 +39,7 @@ const Security = () => {
             </div>
             <div className="col-0 col-md-3 col-xl-4"></div>
             <div className="col-12 col-md-4 col-xl-3">
-              <button className="btn-primary col-12 rounded border-0 px-2">Enable 2FA</button>
+              <button className="btn-primary col-12 rounded border-0 p-2">Enable 2FA</button>
             </div>
           </div>
         </div>
