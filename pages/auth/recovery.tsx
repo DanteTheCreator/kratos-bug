@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import companyLogo from "../../public/assets/img/logo.png";
 import {
   SelfServiceRecoveryFlow,
-  SubmitSelfServiceRecoveryFlowBody,
+  SubmitSelfServiceRecoveryFlowWithLinkMethodBody,
 } from "@ory/client";
 import { useSelector } from "react-redux";
 import { AxiosError } from "axios";
@@ -62,7 +62,7 @@ const Recovery = () => {
         setCsrfToken(
           (
             data.ui.nodes.find(
-              (x) => (x.attributes as any).name == "csrf_token"
+              (x) => (x.attributes as any).name === "csrf_token"
             )?.attributes as any
           ).value
         );
@@ -83,13 +83,19 @@ const Recovery = () => {
   const onSubmit = (event: any) => {
     event.preventDefault();
     setIsBusy(true);
-    let body: SubmitSelfServiceRecoveryFlowBody = {
+    let body: SubmitSelfServiceRecoveryFlowWithLinkMethodBody = {
       csrf_token: event.target.csrf_token.value,
       email: event.target.email.value,
       method: "link",
     };
     ory
-      .submitSelfServiceRecoveryFlow(String(flow?.id), body)
+      .submitSelfServiceRecoveryFlow(
+        String(flow?.id),
+        body,
+        undefined,
+        undefined,
+        { credentials: "include" }
+      )
       .then(({ data }: { data: SelfServiceRecoveryFlow }) => {
         // Form submission was successful, show the message to the user!
         setFlow(data);

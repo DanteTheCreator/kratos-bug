@@ -17,7 +17,6 @@ const ChangePassword: NextPage = () => {
   const [csrfToken, setCsrfToken] = useState<string>();
   const [isSent, setIsSent] = useState<boolean>(false);
   const [isBusy, setIsBusy] = useState<boolean>(false);
-  const { cookie } = useSelector((state: any) => state.auth);
   const router = useRouter();
   const { flow: flowId, return_to: returnTo } = router.query;
   const dispatch = useDispatch();
@@ -34,21 +33,31 @@ const ChangePassword: NextPage = () => {
       return;
     }
 
-   
+    if (flowId) {
+      ory
+        .getSelfServiceSettingsFlow(String(flowId))
+        .then(({ data }: { data: any }) => {
+          setFlow(data);
+        })
+        .catch(handleFlowError(router, "recovery", setFlow));
+      return;
+    }
 
     // Otherwise we initialize it
     ory
       .initializeSelfServiceSettingsFlowForBrowsers(
-        returnTo ? String(returnTo) : undefined , {credentials: 'include'}
+        returnTo ? String(returnTo) : undefined,
+        { credentials: "include" }
       )
       .then(({ data }: { data: SelfServiceSettingsFlow }) => {
         setFlow(data);
         setCsrfToken(
-            (
-              data.ui.nodes.find(
-                (x) => (x.attributes as any).name == "csrf_token"
-              )?.attributes as any
-            ).value);
+          (
+            data.ui.nodes.find(
+              (x) => (x.attributes as any).name == "csrf_token"
+            )?.attributes as any
+          ).value
+        );
       })
       .catch(handleFlowError(router, "settings", setFlow));
   }, [ory, flowId, router, router.isReady, returnTo, flow]);
@@ -70,10 +79,16 @@ const ChangePassword: NextPage = () => {
     };
     console.log(body);
     ory
-      .submitSelfServiceSettingsFlow(String(flow?.id), body, undefined, undefined, {credentials: 'include'})
+      .submitSelfServiceSettingsFlow(
+        String(flow?.id),
+        body,
+        undefined,
+        undefined,
+        { credentials: "include" }
+      )
       .then(({ data }: { data: SelfServiceSettingsFlow }) => {
         // The settings have been saved and the flow was updated. Let's show it to the user!
-        
+
         setFlow(data);
       })
       .catch(handleFlowError(router, "settings", setFlow))
